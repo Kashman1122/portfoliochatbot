@@ -1,0 +1,8 @@
+streamlit
+PyPDF2
+google-generativeai
+fastapi
+nltk
+scikit-learn
+Pillow
+pytesseract
