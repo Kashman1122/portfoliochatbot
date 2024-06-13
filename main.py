@@ -550,6 +550,8 @@ class ChatRequest(BaseModel):
     option: str
 
 origins = [
+    "https://kashish1122.pythonanywhere.com/",
+    "http://127.0.0.1:8000/index/",
     "http://localhost:63342",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
