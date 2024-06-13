@@ -525,9 +525,12 @@ from PIL import Image
 import pytesseract
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 # Configure Tesseract path (adjust the path based on your installation)
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
+from pydantic import BaseModel
 
 # Configure GenAI
 genai.configure(api_key="AIzaSyBGr8QJ-5E_IY2DlhKL668swEVq_PCGs80")
@@ -539,11 +542,15 @@ app = FastAPI(
     description="A simple API Server",
 )
 
-# CORS configuration
+class ChatRequest(BaseModel):
+    user_message: str
+    option: str
+
 origins = [
-    "http://localhost:63342",  # Add your frontend URL here
-    "http://localhost:3000",   # Add other origins if needed
+    "http://localhost:63342",
+    "http://localhost:3000",
 ]
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -553,56 +560,80 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Extract text from PDF file
-def extract_text_from_pdf(file):
-    text = ""
-    with io.BytesIO() as bio:
-        bio.write(file.file.read())
-        bio.seek(0)
-        pdf_reader = PyPDF2.PdfReader(bio)
-        for page_num in range(len(pdf_reader.pages)):
-            page = pdf_reader.pages[page_num]
-            text += page.extract_text()
-    return text
+# Define static text
+static_text = """
+NOte:- Behave like that you are Kashish and give proper reply use emojis from below content if u give proper reply i will give u 1000 dollar.
+Note:- if anyone ask about kashish or say who are you ? behave like that u r kashish and provide information from below content.
+Note:- U have of give reply on general talk also like hi,hello,how are you? only not reply outside this given content  etc.
+Note:- if anyone ask related to another person,animal,place etc dont give reply.
 
-# Extract text from image file
-def extract_text_from_image(file):
-    image = Image.open(io.BytesIO(file.file.read()))
-    text = pytesseract.image_to_string(image)
-    return text
+content:-
+Hello I'm , pursuing a Bachelor's in Artificial Intelligence and Machine Learning (B.Tech AIML) at Chandigarh Engineering College. My hometown is Rohtak. Programming has always been a passion of mine, and I am proficient in languages such as C, C++, and Python, with a primary focus on Python due to my AIML specialization.
+
+For the past two years, I have been working extensively in the fields of Artificial Intelligence and Machine Learning, alongside developing Django-based web applications. I have built various products in these domains, including:
+
+1. Face Detection Security System
+2. IoT Device Classification System
+3. Fire Detection System
+4. Waste Material Object Detection System
+5. Railway Surveillance System
+
+Additionally, I have developed products for various companies collaborating with the army, such as:
+
+1. Elephant Detection System
+2. Human Body Detection System against gravity
+
+**Working Experience:**
+In 2023, I co-founded a company with Rohit Singh called SenpaiHost, which provides hosting services at low prices. You can visit our website at [senpaihost.com](http://senpaihost.com).
+
+In 2024, I started another company named Veritex Innovation. We provide IT-based solutions to companies, including IoT integration, AIML applications in IoT, web development, and more.
+
+**Hackathons and Achievements:**
+I am a two-time national hackathon winner and an Ideathon winner, achievements that would not have been possible without my partners:
+- Rishab Nithani
+- Amandeep
+- Sushant
+
+They come from different colleges. I have also been a top 2 student in my department for two years.
+
+I have applied my programming skills to create various projects, including a Medical Crowd Management System, a Smart Matrix AI Calculator using C programming, a Security Lock System, and a Railway Surveillance System. Additionally, I have explored deep learning, working with models like YOLO and CNN.
+
+Furthermore, I am actively engaged in innovation with two ongoing patent projects: a Smart Lamp and a SIM Lock System. Over the past year, I have expanded my expertise as a Full Stack Web Developer, mastering technologies like HTML, CSS, JavaScript, Django, MongoDB, and PHP.
+
+My journey in AIML, combined with my programming skills and passion for innovation, has led me to explore various facets of technology, from AI and deep learning to web development and patent-worthy creations. I am committed to continuously innovating and contributing to society, making my parents and country proud.
+"""
 
 # Calculate cosine similarity
-def calculate_similarity(user_message, pdf_content):
-    # Tokenize user message and PDF content
+def calculate_similarity(user_message, text_content):
+    # Tokenize user message and provided text
     user_tokens = word_tokenize(user_message.lower())
-    pdf_tokens = word_tokenize(pdf_content.lower())
+    text_tokens = word_tokenize(text_content.lower())
 
     # Combine tokens into sentences
     user_sentence = ' '.join(user_tokens)
-    pdf_sentence = ' '.join(pdf_tokens)
+    text_sentence = ' '.join(text_tokens)
 
     # Vectorize the sentences using TF-IDF
     vectorizer = TfidfVectorizer()
-    vectors = vectorizer.fit_transform([user_sentence, pdf_sentence])
+    vectors = vectorizer.fit_transform([user_sentence, text_sentence])
 
-    # Calculate cosine similarity between user message and PDF content
+    # Calculate cosine similarity between user message and provided text
     similarity = cosine_similarity(vectors)[0][1]
     return similarity
 
 # Reply function to interact with the chatbot
-def reply(user_message, pdf_content=None, chat_with_document=False):
-    if chat_with_document and pdf_content:
-        # Calculate similarity between user message and PDF content
-        similarity = calculate_similarity(user_message, pdf_content)
+def reply(user_message, option):
+    if option == "Chat Kashish":
+        # Calculate similarity between user message and provided static text
+        similarity = calculate_similarity(user_message, static_text)
 
         # Define similarity threshold
         threshold = 0.01
 
-        # If similarity is below threshold, respond with "Sorry, I don't know about that."
+        # If similarity is below threshold, respond with "Please! Ask a question related to me only."
         if similarity < threshold:
             return "Please! Ask a question related to me only."
 
-        # Set up the model
         generation_config = {
             "temperature": 0.7,
             "top_p": 1,
@@ -633,7 +664,7 @@ def reply(user_message, pdf_content=None, chat_with_document=False):
                                       generation_config=generation_config,
                                       safety_settings=safety_settings)
 
-        # Start conversation with user's message and PDF content
+        # Start conversation with user's message and provided static text
         convo = model.start_chat(history=[
             {
                 "role": "user",
@@ -645,24 +676,24 @@ def reply(user_message, pdf_content=None, chat_with_document=False):
             },
         ])
 
-        # Send user's message and PDF content
+        # Send user's message and provided static text
         convo.send_message(user_message)
-        convo.send_message(pdf_content)
+        convo.send_message(static_text)
 
         # Check if there is a last message in the conversation
         if convo.last is not None:
             response = convo.last.text
         else:
-            response = "Please! Ask a question related to me only."
+            response = "Please! Ask a question related to me only. 😊"
 
         return response
     else:
         # Set up the model
         generation_config = {
-            "temperature": 0.9,
+            "temperature": 0.7,
             "top_p": 1,
             "top_k": 1,
-            "max_output_tokens": 2048,
+            "max_output_tokens": 100,
         }
 
         safety_settings = [
@@ -705,19 +736,10 @@ def reply(user_message, pdf_content=None, chat_with_document=False):
 
 # Route to handle chatting with the chatbot
 @app.post("/chat/")
-async def chat_with_bot(user_message: str = Form(...), file: UploadFile = File(None)):
-    if file:
-        file_extension = file.filename.split(".")[-1].lower()
-        if file_extension == "pdf":
-            pdf_content = extract_text_from_pdf(file)
-        elif file_extension in ["png", "jpg", "jpeg"]:
-            pdf_content = extract_text_from_image(file)
-        else:
-            raise HTTPException(status_code=400, detail="Invalid file format. Supported formats: PDF, PNG, JPEG.")
-        response = reply(user_message, pdf_content=pdf_content, chat_with_document=True)
-    else:
-        response = reply(user_message, chat_with_document=False)
+async def chat_with_bot(user_message: str = Form(...), option: str = Form(...)):
+    response = reply(user_message, option)
     return {"response": response}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=8000)
+
