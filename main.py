@@ -549,12 +549,12 @@ class ChatRequest(BaseModel):
 origins = [
     "http://localhost:63342",
     "http://localhost:3000",
-    "http://127.0.0.1:63342",
     "http://127.0.0.1:3000",
     "https://portfoliochatbot-1.onrender.com",
     "http://35.160.120.126",
     "http://44.233.151.27",
-    "http://34.211.200.85"
+    "http://34.211.200.85",
+    "http://localhost:63342/abstractive_question_answering.py/client.html?_ijt=26kkjojv2r34skfq1ufin63v7r&_ij_reload=RELOAD_ON_SAVE",
 ]
 
 app.add_middleware(
