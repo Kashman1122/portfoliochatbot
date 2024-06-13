@@ -531,6 +531,9 @@ from pathlib import Path
 # Configure Tesseract path (adjust the path based on your installation)
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
 from pydantic import BaseModel
+import nltk
+
+nltk.download('punkt')
 
 # Configure GenAI
 genai.configure(api_key="AIzaSyBGr8QJ-5E_IY2DlhKL668swEVq_PCGs80")
