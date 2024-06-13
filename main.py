@@ -551,7 +551,7 @@ origins = [
     "http://localhost:3000",
     "http://127.0.0.1:63342",
     "http://127.0.0.1:3000",
-    "https://portfoliochatbot-1.onrender.com"
+    "https://portfoliochatbot-1.onrender.com/chat/"
 ]
 
 app.add_middleware(
