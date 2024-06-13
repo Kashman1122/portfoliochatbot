@@ -1,9 +1,9 @@
-streamlit
-PyPDF2
-google-generativeai
 fastapi
+uvicorn
+google-generativeai
 nltk
 scikit-learn
-Pillow
+pillow
 pytesseract
-uvicorn
+PyPDF2
+pydantic
