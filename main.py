@@ -549,8 +549,10 @@ class ChatRequest(BaseModel):
 origins = [
     "http://localhost:63342",
     "http://localhost:3000",
+    "http://127.0.0.1:63342",
+    "http://127.0.0.1:3000",
+    "https://portfoliochatbot-1.onrender.com"
 ]
-
 
 app.add_middleware(
     CORSMiddleware,
