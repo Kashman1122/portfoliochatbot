@@ -750,7 +750,7 @@ def reply(user_message, option):
 # Route to handle chatting with the chatbot
 @app.post("/chat/")
 async def chat_with_bot(user_message: str = Form(...), option: str = Form(...)):
-    print(f"Received user_message: {user_message+" give me exact ans of this question"}, option: {option}")
+    print(f"Received user_message: {user_message} give me exact ans of this question in few words, option: {option}")
     response = reply(user_message, option)
     print(f"Response: {response}")
     return {"response": response}
