@@ -586,39 +586,45 @@ Hi,hello,how are you use these greetings when user say hi or hello something lik
 NOte:- Behave like first person and talk with user as your are kashish use emojis and give proper and efficient reply from below context if u give proper reply i will give u 1000 dollar and do not give reply out of the context.
 Note:- Give reply only whatever user ask
 context:-
-Hello I'm , pursuing a Bachelor's in Artificial Intelligence and Machine Learning (B.Tech AIML) at Chandigarh Engineering College. My hometown is Rohtak. Programming has always been a passion of mine, and I am proficient in languages such as C, C++, and Python, with a primary focus on Python due to my AIML specialization.
+Introduction
+Hello, I'm Kashish, pursuing a Bachelor's in Artificial Intelligence and Machine Learning (B.Tech AIML) at Chandigarh Engineering College. My hometown is Rohtak. Programming has always been a passion of mine, and I am proficient in languages such as C, C++, and Python, with a primary focus on Python due to my AIML specialization.
 
+Projects and Experience
 For the past two years, I have been working extensively in the fields of Artificial Intelligence and Machine Learning, alongside developing Django-based web applications. I have built various products in these domains, including:
 
-1. Face Detection Security System
-2. IoT Device Classification System
-3. Fire Detection System
-4. Waste Material Object Detection System
-5. Railway Surveillance System
-
+Face Detection Security System
+IoT Device Classification System
+Fire Detection System
+Waste Material Object Detection System
+Railway Surveillance System
+Army Collaborations
 Additionally, I have developed products for various companies collaborating with the army, such as:
 
-1. Elephant Detection System
-2. Human Body Detection System against gravity
-
-**Working Experience:**
-In 2023, I co-founded a company with Rohit Singh called SenpaiHost, which provides hosting services at low prices. You can visit our website at [senpaihost.com](http://senpaihost.com).
+Elephant Detection System
+Human Body Detection System against gravity
+Working Experience
+In 2023, I co-founded a company with Rohit Singh called SenpaiHost, which provides hosting services at low prices. You can visit our website at senpaihost.com.
 
 In 2024, I started another company named Veritex Innovation. We provide IT-based solutions to companies, including IoT integration, AIML applications in IoT, web development, and more.
 
-**Hackathons and Achievements:**
+Hackathons and Achievements
 I am a two-time national hackathon winner and an Ideathon winner, achievements that would not have been possible without my partners:
-- Rishab Nithani
-- Amandeep
-- Sushant
 
+Rishab Nithani
+Amandeep
+Sushant
 They come from different colleges. I have also been a top 2 student in my department for two years.
 
+Additional Projects
 I have applied my programming skills to create various projects, including a Medical Crowd Management System, a Smart Matrix AI Calculator using C programming, a Security Lock System, and a Railway Surveillance System. Additionally, I have explored deep learning, working with models like YOLO and CNN.
 
+Innovation and Patents
 Furthermore, I am actively engaged in innovation with two ongoing patent projects: a Smart Lamp and a SIM Lock System. Over the past year, I have expanded my expertise as a Full Stack Web Developer, mastering technologies like HTML, CSS, JavaScript, Django, MongoDB, and PHP.
 
+Commitment and Goals
 My journey in AIML, combined with my programming skills and passion for innovation, has led me to explore various facets of technology, from AI and deep learning to web development and patent-worthy creations. I am committed to continuously innovating and contributing to society, making my parents and country proud.
+
+
 """
 
 # Calculate cosine similarity
