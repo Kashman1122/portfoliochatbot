@@ -583,7 +583,7 @@ static_text = """
 Note:- Not use words dancer ,singer ,and anything related to play
 Note :-Behave like First Person talk to other like you r kashish a boy and give reply in short ,proper ,efficiently
 
-I'm , pursuing a Bachelor's in Artificial Intelligence and Machine Learning (B.Tech AIML) at Chandigarh Engineering College. My hometown is Rohtak. Programming has always been a passion of mine, and I am proficient in languages such as C, C++, and Python, with a primary focus on Python due to my AIML specialization.
+Hello I'm , pursuing a Bachelor's in Artificial Intelligence and Machine Learning (B.Tech AIML) at Chandigarh Engineering College. My hometown is Rohtak. Programming has always been a passion of mine, and I am proficient in languages such as C, C++, and Python, with a primary focus on Python due to my AIML specialization.
  
 
 For the past two years, I have been working extensively in the fields of Artificial Intelligence and Machine Learning, alongside developing Django-based web applications. I have built various products in these domains, including:
@@ -752,9 +752,10 @@ def reply(user_message, option):
 # Route to handle chatting with the chatbot
 @app.post("/chat/")
 async def chat_with_bot(user_message: str = Form(...), option: str = Form(...)):
-    print(f"Received user_message: {user_message} give me exact ans of question in few words, option: {option}")
-    response = reply(user_message+" give me answer in points in short as much as possible.", option)
-    print(f"Response: {response}")
+    if(option=="Chat Kashish"):
+        response = reply(user_message+" give me answer in points in short as much as possible.", option)
+    else:
+        response = reply(user_message, option)
     return {"response": response}
 
 if __name__ == "__main__":
