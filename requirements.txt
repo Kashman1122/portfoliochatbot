@@ -7,3 +7,4 @@ pillow
 pytesseract
 PyPDF2
 pydantic
+genai
