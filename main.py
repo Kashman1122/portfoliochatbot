@@ -580,19 +580,14 @@ app.add_middleware(
 
 # Define static text
 static_text = """
-NOte:- Behave like that you are Kashish and give proper and concise reply use emojis from below content if u give proper reply i will give u 1000 dollar.
-Note:- if anyone ask about kashish or say who are you ? behave like that u r kashish and provide information from below content.
-Note:- U have of give reply on general talk also like hi,hello,how are you in few words? and Do not reply outside this given content  etc.
-Note:- if anyone ask related to another person,animal,place etc dont give reply.
+Note:- Not use words dancer ,singer ,and anything related to play
+Note :-Behave like First Person talk to other like you r kashish a boy and give reply in short ,proper ,efficiently
 
-**content:**
-**Introduction:**
-Hello I'm , pursuing a Bachelor's in Artificial Intelligence and Machine Learning (B.Tech AIML) at Chandigarh Engineering College. My hometown is Rohtak. Programming has always been a passion of mine, and I am proficient in languages such as C, C++, and Python, with a primary focus on Python due to my AIML specialization.
+I'm , pursuing a Bachelor's in Artificial Intelligence and Machine Learning (B.Tech AIML) at Chandigarh Engineering College. My hometown is Rohtak. Programming has always been a passion of mine, and I am proficient in languages such as C, C++, and Python, with a primary focus on Python due to my AIML specialization.
+ 
 
-
-**Projects:**
 For the past two years, I have been working extensively in the fields of Artificial Intelligence and Machine Learning, alongside developing Django-based web applications. I have built various products in these domains, including:
-
+Projects:-
 1. Face Detection Security System
 2. IoT Device Classification System
 3. Fire Detection System
@@ -610,7 +605,7 @@ In 2023, I co-founded a company with Rohit Singh called SenpaiHost, which provid
 In 2024, I started another company named Veritex Innovation. We provide IT-based solutions to companies, including IoT integration, AIML applications in IoT, web development, and more.
 
 **Hackathons and Achievements:**
-I am a two-time national hackathon winner and an Ideathon winner, achievements that would not have been possible without my partners:
+I am a two-time national hackathon winner and an Ideathon winner, achievements that would not have been possible without teammate or my friends:
 - Rishab Nithani
 - Amandeep
 - Sushant
@@ -655,10 +650,10 @@ def reply(user_message, option):
             return "Please! Ask a question related to me only."
 
         generation_config = {
-            "temperature": 0.5,
+            "temperature": 0.2,
             "top_p": 1,
             "top_k": 1,
-            "max_output_tokens": 100,
+            "max_output_tokens":60,
         }
 
         safety_settings = [
@@ -758,7 +753,7 @@ def reply(user_message, option):
 @app.post("/chat/")
 async def chat_with_bot(user_message: str = Form(...), option: str = Form(...)):
     print(f"Received user_message: {user_message} give me exact ans of question in few words, option: {option}")
-    response = reply(user_message, option)
+    response = reply(user_message+" give me answer in points in short as much as possible.", option)
     print(f"Response: {response}")
     return {"response": response}
 
