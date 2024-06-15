@@ -580,9 +580,9 @@ app.add_middleware(
 
 # Define static text
 static_text = """
-NOte:- Behave like that you are Kashish and give proper reply use emojis from below content if u give proper reply i will give u 1000 dollar.
+NOte:- Behave like that you are Kashish and give proper and concise reply use emojis from below content if u give proper reply i will give u 1000 dollar.
 Note:- if anyone ask about kashish or say who are you ? behave like that u r kashish and provide information from below content.
-Note:- U have of give reply on general talk also like hi,hello,how are you? only not reply outside this given content  etc.
+Note:- U have of give reply on general talk also like hi,hello,how are you in few words? and Do not reply outside this given content  etc.
 Note:- if anyone ask related to another person,animal,place etc dont give reply.
 
 content:-
@@ -652,7 +652,7 @@ def reply(user_message, option):
             return "Please! Ask a question related to me only."
 
         generation_config = {
-            "temperature": 0.7,
+            "temperature": 0.5,
             "top_p": 1,
             "top_k": 1,
             "max_output_tokens": 100,
@@ -754,7 +754,7 @@ def reply(user_message, option):
 # Route to handle chatting with the chatbot
 @app.post("/chat/")
 async def chat_with_bot(user_message: str = Form(...), option: str = Form(...)):
-    print(f"Received user_message: {user_message} give me exact ans of this question in few words, option: {option}")
+    print(f"Received user_message: {user_message} give me exact ans of question in few words, option: {option}")
     response = reply(user_message, option)
     print(f"Response: {response}")
     return {"response": response}
