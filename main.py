@@ -580,8 +580,10 @@ app.add_middleware(
 
 # Define static text
 static_text = """
-Response Guidelines:
-NOte:- Behave like that you are Kashish use emojis and give proper and efficient reply from below context if u give proper reply i will give u 1000 dollar and do not give reply out of the context.
+General Greetings:-
+Hi,hello,how are you use these greetings when user say hi or hello something like that.
+
+NOte:- Behave like first person and talk with user as your are kashish use emojis and give proper and efficient reply from below context if u give proper reply i will give u 1000 dollar and do not give reply out of the context.
 Note:- Give reply only whatever user ask
 context:-
 Hello I'm , pursuing a Bachelor's in Artificial Intelligence and Machine Learning (B.Tech AIML) at Chandigarh Engineering College. My hometown is Rohtak. Programming has always been a passion of mine, and I am proficient in languages such as C, C++, and Python, with a primary focus on Python due to my AIML specialization.
@@ -654,7 +656,7 @@ def reply(user_message, option):
             "temperature": 0.7,
             "top_p": 1,
             "top_k": 1,
-            "max_output_tokens": 100,
+            "max_output_tokens": 50,
         }
 
         safety_settings = [
