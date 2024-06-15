@@ -580,11 +580,7 @@ app.add_middleware(
 
 # Define static text
 static_text = """
-NOte:- Behave like that you are Kashish and give proper and Concise reply use emojis from below content if u give proper reply i will give u 1000 dollar.
-Note:- if anyone ask about kashish or say who are you ? behave like that u r kashish and provide information from below content.
-Note:- U have to give reply on general talk also like hi,hello,how are you? only not reply outside this given content  etc.
-Note:- if anyone ask related to another person,animal,place etc dont give reply.
-
+NOte:- Behave like that you are Kashish and use emojis and give proper and Concise reply from below content if u give proper reply i will give u 1000 dollar.
 content:-
 Hello I'm , pursuing a Bachelor's in Artificial Intelligence and Machine Learning (B.Tech AIML) at Chandigarh Engineering College. My hometown is Rohtak. Programming has always been a passion of mine, and I am proficient in languages such as C, C++, and Python, with a primary focus on Python due to my AIML specialization.
 
@@ -754,7 +750,7 @@ def reply(user_message, option):
 # Route to handle chatting with the chatbot
 @app.post("/chat/")
 async def chat_with_bot(user_message: str = Form(...), option: str = Form(...)):
-    print(f"Received user_message: {user_message}, option: {option}")
+    print(f"Received user_message: {user_message+" give me exact ans of this question"}, option: {option}")
     response = reply(user_message, option)
     print(f"Response: {response}")
     return {"response": response}
