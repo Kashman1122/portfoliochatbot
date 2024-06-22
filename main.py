@@ -550,6 +550,8 @@ class ChatRequest(BaseModel):
     option: str
 
 origins = [
+    "http://192.168.35.65:8000/index/",
+    "http://192.168.35.65:8000",
     "http://192.168.101.7:8000/index/",
     "http://192.168.101.7:8000",
     "http://127.0.0.1:8000",
