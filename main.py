@@ -668,10 +668,10 @@ def reply(user_message, option):
             return "Please! Ask a question related to me only."
 
         generation_config = {
-            "temperature": 0.2,
+            "temperature": 0,
             "top_p": 1,
             "top_k": 1,
-            "max_output_tokens":60,
+            "max_output_tokens":100,
         }
 
         safety_settings = [
