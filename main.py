@@ -772,7 +772,7 @@
 #     uvicorn.run(app, host="localhost", port=8000)
 
 
-import streamlit as st
+
 import io
 import PyPDF2
 import google.generativeai as genai
