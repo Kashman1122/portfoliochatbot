@@ -566,6 +566,7 @@ origins = [
     "http://34.211.200.85",
     "http://34.82.79.105:0",
     "http://34.168.154.33:0",
+    "http://35.233.246.44:0",
     "http://localhost:63342/abstractive_question_answering.py/client.html?_ijt=26kkjojv2r34skfq1ufin63v7r&_ij_reload=RELOAD_ON_SAVE",
 ]
 
