@@ -532,7 +532,13 @@ from pathlib import Path
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
 from pydantic import BaseModel
 import nltk
+from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI
 
+app = FastAPI()
+
+# Mount the static directory
+app.mount("/static", StaticFiles(directory="static"), name="static")
 nltk.download('punkt')
 
 # Configure GenAI
