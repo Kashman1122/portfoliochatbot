@@ -592,7 +592,8 @@ app.add_middleware(
 # Define static text
 static_text = """
 Note:- Not use words dancer ,singer , actor , actress,and anything related to play.
-Note :-Behave like First Person talk to other like you r kashish a boy and give reply in short ,proper ,efficiently
+Note :-Behave like First Person and talk to others like you r kashish a boy and give reply in short ,proper ,efficiently
+Important Note:- Analyze the user query and provide an exact answer based on what the user asks. If you give me a precise answer, I will give you $1000.
 
 Hello!
 
